@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import ua.lec.springbootlab4.Entity.Usuario;
 import ua.lec.springbootlab4.Service.UsuarioService;
 
@@ -26,6 +28,7 @@ public class UsuarioController {
 
     //ResponseEntity para formatar respostas mais completas
     @GetMapping
+    @JsonView(Usuario.class)
     public List<Usuario> buscarTodos() {
         return service.buscarTodos();
     };

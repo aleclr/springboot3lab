@@ -1,5 +1,8 @@
 package ua.lec.springbootlab4.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +23,7 @@ public class Usuario {
     private Long id;
 
     @Column(name = "usr_nome")
+    @JsonView(Usuario.class)
     private String nome;
 
     @Column(name = "usr_senha")
