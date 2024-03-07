@@ -11,6 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -37,6 +40,21 @@ public class Usuario {
     @JsonIgnore
     private Set<Anotacao> anotacoes;
 
+    //tabela de ligação = many to many
+    @ManyToMany
+    @JoinTable(name = "uau_usuario_autorizacao",
+        joinColumns = { @JoinColumn(name = "usr_id") },
+        inverseJoinColumns = { @JoinColumn(name = "aut_id") })
+    private Set<Autorizacao> autorizacoes;
+
+    public Set<Autorizacao> getAutorizacoes() {
+        return autorizacoes;
+    };
+
+    public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
+        this.autorizacoes = autorizacoes;
+    };
+
     public Usuario(String nome, String senha) {
         //chamando construtor vazio dentro do construtor cheio, para sempre inicializar o Set
         this();
@@ -47,6 +65,7 @@ public class Usuario {
     //spring necessita do construtor vazio também
     public Usuario(){
         setAnotacoes(new HashSet<Anotacao>());
+        setAutorizacoes(new HashSet<Autorizacao>());
     };
 
     public Long getId() {

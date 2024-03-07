@@ -27,6 +27,7 @@ create table aut_autorizacao (
   unique key uni_aut_nome (aut_nome)
 );
 
+-- não precisa mapear tabela apenas para ligação n-n
 create table uau_usuario_autorizacao (
   usr_id bigint unsigned not null,
   aut_id bigint unsigned not null,
