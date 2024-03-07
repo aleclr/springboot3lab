@@ -1,5 +1,9 @@
 package ua.lec.springbootlab4.Entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.Column;
@@ -7,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -21,20 +26,28 @@ public class Usuario {
     @Column(name = "usr_id")
     private Long id;
 
+    // @JsonView(Usuario.class)
     @Column(name = "usr_nome")
-    @JsonView(Usuario.class)
     private String nome;
 
     @Column(name = "usr_senha")
     private String senha;
 
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private Set<Anotacao> anotacoes;
+
     public Usuario(String nome, String senha) {
+        //chamando construtor vazio dentro do construtor cheio, para sempre inicializar o Set
+        this();
         this.nome = nome;
         this.senha = senha;
     };
 
     //spring necessita do construtor vazio também
-    public Usuario(){};
+    public Usuario(){
+        setAnotacoes(new HashSet<Anotacao>());
+    };
 
     public Long getId() {
         return id;
@@ -58,6 +71,14 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    };
+
+    public Set<Anotacao> getAnotacoes() {
+        return anotacoes;
+    };
+
+    public void setAnotacoes(Set<Anotacao> anotacoes) {
+        this.anotacoes = anotacoes;
     };
 
 }

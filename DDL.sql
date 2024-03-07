@@ -1,3 +1,5 @@
+-- rodar no console com o comando "mysql < DDL.sql"
+
 drop schema if exists spring;
 
 drop user if exists 'user'@'localhost';

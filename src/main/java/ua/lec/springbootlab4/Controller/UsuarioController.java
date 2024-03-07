@@ -28,7 +28,7 @@ public class UsuarioController {
 
     //ResponseEntity para formatar respostas mais completas
     @GetMapping
-    @JsonView(Usuario.class)
+    // @JsonView(Usuario.class)
     public List<Usuario> buscarTodos() {
         return service.buscarTodos();
     };
