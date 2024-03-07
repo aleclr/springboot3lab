@@ -48,6 +48,7 @@ public class UsuarioService {
     };
 
     public Autorizacao buscarAutorizacaoPorId(Long id) {
+        @SuppressWarnings("null")
         Optional<Autorizacao> autOp = autRepo.findById(id);
         if (autOp.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Autorização não encontrada.");
